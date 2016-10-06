@@ -30,9 +30,14 @@
     "react-dom": "^15.3.2"
   },
   "devDependencies": {
+    "autoprefixer": "^6.5.0",
     "css-loader": "^0.25.0",
     "html-webpack-plugin": "^2.22.0",
     "json-loader": "^0.5.4",
+    "normalize.css": "^5.0.0",
+    "postcss-easy-import": "^1.0.1",
+    "postcss-loader": "^0.13.0",
+    "precss": "^1.4.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.1"
