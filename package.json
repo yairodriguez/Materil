@@ -1,0 +1,28 @@
+{
+  "name": "materil",
+  "version": "1.0.0",
+  "description": "UI Kit with React Design and Architectural Patterns",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yairodriguez/Materil.git"
+  },
+  "keywords": [
+    "React",
+    "ES6",
+    "Enzyme",
+    "Webpack",
+    "Redux",
+    "Firebase"
+  ],
+  "author": "Yair Rodriguez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yairodriguez/Materil/issues"
+  },
+  "homepage": "https://github.com/yairodriguez/Materil#readme"
+}
