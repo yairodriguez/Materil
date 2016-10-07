@@ -68,5 +68,14 @@ module.exports = {
       loader: 'json',
       include: [APP, NODE_MODULES]
     }]
-  }
+  },
+  postcss: function processPostcss(webpack) {
+    return [
+      postcssImport({
+        addDependencyTo: webpack
+      }),
+      precss,
+      autoprefixer({ browsers: ['last 5 versions'] })
+    ];
+  },
 }
