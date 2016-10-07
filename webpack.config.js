@@ -83,6 +83,7 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     hot: true,
+    inline: true,
     progress: true,
     stats: 'errors-only',
     host: HOST,
@@ -91,4 +92,28 @@ module.exports = {
     // The path should be an absolute path to build destination.
     outputPath: BUILD
   },
-}
+  // This section specifies the compilation workflow. It uses the DefinePlugin
+  // to define the NODE_ENV variable.
+  // Then, Hot Reloading plugin is activate to refresh browser with any app
+  // changes.
+  // Generate any HTML as configured in the HtmlWebpackPlugin plugin.
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('development')
+      }
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+    new CopyWebpackPlugin([{
+      from: PUBLIC,
+      to: BUILD
+    }], {
+      ignore: ['.DS_Store']
+    }),
+    new HtmlWebpackPlugin({
+      template: TEMPLATE,
+      // JavaScript code placed at the bottom of the body element.
+      inject: 'body'
+    })
+  ]
+};
