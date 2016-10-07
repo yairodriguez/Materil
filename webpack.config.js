@@ -78,4 +78,17 @@ module.exports = {
       autoprefixer({ browsers: ['last 5 versions'] })
     ];
   },
+  // Source maps used for debugging information
+  devtool: 'eval-source-map',
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+    progress: true,
+    stats: 'errors-only',
+    host: HOST,
+    port: PORT,
+    // CopyWebpackPlugin: This is required for webpack-dev-server.
+    // The path should be an absolute path to build destination.
+    outputPath: BUILD
+  },
 }
