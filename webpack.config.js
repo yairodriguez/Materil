@@ -27,7 +27,6 @@ const autoprefixer      = require('autoprefixer');
  * NODE_MODULES path is required when including assets directly from
  * installed npm packages.
  */
-
 const APP               = path.join(__dirname, 'app');
 const BUILD             = path.join(__dirname, 'build');
 const STYLE             = path.join(__dirname, 'app/style.css');
@@ -36,3 +35,21 @@ const TEMPLATE          = path.join(__dirname, 'app/templates/index.html');
 const NODE_MODULES      = path.join(__dirname, 'node_modules');
 const HOST              = process.env.HOST || 'localhost';
 const PORT              = process.env.PORT || 8080;
+
+/**
+ * Defines the app entry, build output, and the extensions which will resolve
+ * automatically.
+ */
+module.exports = {
+  entry: {
+    app: APP,
+    style: STYLE
+  },
+  output: {
+    path: BUILD,
+    filename: '[name].js'
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx', '.css']
+  },
+}
