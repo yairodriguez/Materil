@@ -1,0 +1,119 @@
+/**
+ * Init the webpack itself, and require some webpack plugins.
+ */
+const webpack           = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path              = require('path');
+
+/**
+ * PostCSS support.
+ */
+const postcssImport     = require('postcss-easy-import');
+const precss            = require('precss');
+const autoprefixer      = require('autoprefixer');
+
+/**
+ * APP path is used to specify the app entry point, location of the root
+ * component.
+ * BUILD path specifies the target folder where production compiled app
+ * files will be pushed.
+ * STYLE path indicates the root CSS file that imports other styles.
+ * PUBLIC path is a folder in development that is copied as–is to root of
+ * BUILD, used for storing web server root files like robots.txt and
+ * favicon.ico, among others.
+ * TEMPLATE specifies the template used by html-webpack-plugin to generate
+ * the index.html file.
+ * NODE_MODULES path is required when including assets directly from
+ * installed npm packages.
+ */
+const APP               = path.join(__dirname, 'app');
+const BUILD             = path.join(__dirname, 'build');
+const STYLE             = path.join(__dirname, 'app/style.css');
+const PUBLIC            = path.join(__dirname, 'app/public');
+const TEMPLATE          = path.join(__dirname, 'app/templates/index.html');
+const NODE_MODULES      = path.join(__dirname, 'node_modules');
+const HOST              = process.env.HOST || 'localhost';
+const PORT              = process.env.PORT || 8080;
+
+/**
+ * Defines the app entry, build output, and the extensions which will resolve
+ * automatically.
+ */
+module.exports = {
+  entry: {
+    app: APP,
+    style: STYLE
+  },
+  output: {
+    path: BUILD,
+    filename: '[name].js'
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx', '.css']
+  },
+  module: {
+    loaders: [{
+      test: /\.jsx?$/,
+      loaders: ['babel?cacheDirectory'],
+      include: APP
+    },
+    {
+      test: /\.css$/,
+      loaders: ['style', 'css', 'postcss'],
+      include: [APP, NODE_MODULES]
+    },
+    {
+      test: /\.json$/,
+      loader: 'json',
+      include: [APP, NODE_MODULES]
+    }]
+  },
+  postcss: function processPostcss(webpack) {
+    return [
+      postcssImport({
+        addDependencyTo: webpack
+      }),
+      precss,
+      autoprefixer({ browsers: ['last 5 versions'] })
+    ];
+  },
+  // Source maps used for debugging information
+  devtool: 'eval-source-map',
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+    inline: true,
+    progress: true,
+    stats: 'errors-only',
+    host: HOST,
+    port: PORT,
+    // CopyWebpackPlugin: This is required for webpack-dev-server.
+    // The path should be an absolute path to build destination.
+    outputPath: BUILD
+  },
+  // This section specifies the compilation workflow. It uses the DefinePlugin
+  // to define the NODE_ENV variable.
+  // Then, Hot Reloading plugin is activate to refresh browser with any app
+  // changes.
+  // Generate any HTML as configured in the HtmlWebpackPlugin plugin.
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+    new CopyWebpackPlugin([{
+      from: PUBLIC,
+      to: BUILD
+    }], {
+      ignore: ['.DS_Store']
+    }),
+    new HtmlWebpackPlugin({
+      template: TEMPLATE,
+      // JavaScript code placed at the bottom of the body element.
+      inject: 'body'
+    })
+  ]
+};
