@@ -52,4 +52,21 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx', '.css']
   },
+  module: {
+    loaders: [{
+      test: /\.jsx?$/,
+      loaders: ['babel?cacheDirectory'],
+      include: APP
+    },
+    {
+      test: /\.css$/,
+      loaders: ['style', 'css', 'postcss'],
+      include: [APP, NODE_MODULES]
+    },
+    {
+      test: /\.json$/,
+      loader: 'json',
+      include: [APP, NODE_MODULES]
+    }]
+  }
 }
