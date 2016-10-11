@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
 import Hello from './Hello';
 
-export default class World extends React.Component {
+export default class World extends Component {
   static propTypes = {
-    greet: React.PropTypes.string.isRequired
+    greet: PropTypes.string.isRequired
   };
 
   static defaultProps = {
