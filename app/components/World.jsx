@@ -27,7 +27,7 @@ export default class World extends Component {
     this.setState({ greet: 'Yo!' });
   }
 
-  hindiGreet () {
+  slangHindi () {
     this.setState({ greet: 'Namaste' });
   }
 
