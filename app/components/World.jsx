@@ -44,9 +44,9 @@ export default class World extends Component {
       <div className='World-card'>
         <Hello greet={renderGreeting} message='World!' />
         <h2>
-          <a href='#' onClick={this.slangGreet}>Slang</a>
+          <a onClick={this.slangGreet}>Slang</a>
           {' or '}
-          <a href='#' onClick={this.slangHindi}>Hindi</a>
+          <a onClick={this.slangHindi}>Hindi</a>
         </h2>
         <input
           type='text'
