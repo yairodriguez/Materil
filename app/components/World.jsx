@@ -2,6 +2,14 @@ import React from 'react';
 import Hello from './Hello';
 
 export default class World extends React.Component {
+  static propTypes = {
+    greet: React.PropTypes.string.isRequired
+  };
+
+  static defaultProps = {
+    greet: 'Hello'
+  };
+
   constructor (props) {
     super(props);
 
