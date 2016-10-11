@@ -26,4 +26,27 @@ export default class World extends React.Component {
   handleNameChange (event) {
     this.setState({ value: event.target.value });
   }
+
+  render () {
+    const renderGreeting = this.state.value
+      ? `${this.state.value} says ${this.state.greet}`
+      : this.state.greet;
+
+    return (
+      <div className='World-card'>
+        <Hello greet={renderGreeting} message='World!' />
+        <h2>
+          <a href='#' onClick={this.slangGreet}>Slang</a>
+          {' or '}
+          <a href='#' onClick={this.slangHindi}>Hindi</a>
+        </h2>
+        <input
+          type='text'
+          value={this.state.value}
+          placeholder='Enter a name'
+          onChange={this.handleNameChange}
+        />
+      </div>
+    );
+  }
 }
