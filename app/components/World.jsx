@@ -14,4 +14,16 @@ export default class World extends React.Component {
     this.slangHindi = this.slangHindi.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
   }
+
+  slangGreet () {
+    this.setState({ greet: 'Yo!' });
+  }
+
+  hindiGreet () {
+    this.setState({ greet: 'Namaste' });
+  }
+
+  handleNameChange (event) {
+    this.setState({ value: event.target.value });
+  }
 }
