@@ -1,0 +1,29 @@
+html,
+body {
+  color: black;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-size: 100%;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 225%;
+  font-weight: 300;
+}
+
+h2 {
+  font-size: 150%;
+  font-weight: 400;
+}
+
+a {
+  color: steelblue;
+  text-decoration: none;
+}
+
+a:focus,
+a:hover {
+  border-bottom: 1px solid steelblue;
+  cursor: pointer;
+}
